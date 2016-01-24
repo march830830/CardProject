@@ -13,7 +13,7 @@
 - (instancetype) initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame titleString:@"My Card"];
     if (self) {
-        
+        NSLog(@"132");
         [self setNavBarButton];
         
         self.buttons = [NSMutableArray array];
