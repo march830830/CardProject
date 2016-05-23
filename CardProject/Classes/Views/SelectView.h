@@ -11,7 +11,15 @@
 
 @interface SelectView : BaseView
 
+
+- (instancetype) initWithFrame:(CGRect)frame CardDic:(NSMutableDictionary*)cardDic;
+
 @property (nonatomic, strong) UIButton *confirmButton;
 @property (nonatomic, strong) NSMutableArray *buttons;
+@property (strong, nonatomic) CIImage *orignalImage;
+@property (strong, nonatomic) UIImage *filterImage;
+@property (strong, nonatomic) UIImageView *filterImageView;
+@property (strong, nonatomic) UIScrollView *scrollView;
+
 
 @end

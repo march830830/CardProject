@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseController.h"
+#import "InsertData.h"
 @class  ResultView;
-
+@class  DatabaseModel;
 @interface ResultController : BaseController
 
 @property (nonatomic, strong) ResultView *resultView;
+@property (nonatomic, strong) NSMutableDictionary *resultDic;
+@property(nonatomic, strong, setter=setDBData:)InsertData *insertData;
+@property (nonatomic, strong) NSString *pointString;
 
 @end

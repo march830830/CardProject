@@ -37,6 +37,11 @@
         [self.continueButton setBackgroundImage:[UIImage imageNamed:@"next"] forState:UIControlStateNormal];
         [self addSubview:self.continueButton];
         
+        self.pointLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.frame) * 0.12, CGRectGetHeight(self.frame) * 0.8, CGRectGetWidth(self.frame) * 0.7, CGRectGetHeight(self.frame) * 0.04)];
+        self.pointLabel.text = @"禮券總額 : 5500";
+        self.pointLabel.textColor = [UIColor whiteColor];
+        [self addSubview:self.pointLabel];
+        
     }
     return self;
 }

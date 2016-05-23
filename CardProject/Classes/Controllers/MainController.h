@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseController.h"
-
+#import "DatabaseModel.h"
 @class MainView;
 
 @interface MainController : BaseController
 
 @property (nonatomic, strong) MainView *mainView;
+@property (nonatomic, strong) DatabaseModel *databaseModel;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "MainController.h"
 #import "MainView.h"
+#import "RecordController.h"
 #import "StoreController.h"
 #import "NetworkManager.h"
 #import "StoreModel.h"
@@ -16,6 +17,8 @@
 
 @property (nonatomic) NSInteger page;
 @property (nonatomic, strong) StoreController *storeController;
+@property (nonatomic, strong) RecordController *recordController;
+
 @property (nonatomic, strong) NSMutableArray *testArray;
 
 @end
@@ -30,26 +33,33 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.testArray = [NSMutableArray arrayWithObjects:@"明禎1",@"明禎2",@"明禎3", nil];
-    self.mainView = [[MainView alloc] initWithFrame:self.view.frame ImageArray:self.testArray];
+    self.testArray = [NSMutableArray array];
+    self.mainView = [[MainView alloc] initWithFrame:self.view.frame];
     self.view = self.mainView;
     self.mainView.delegate = self;
     self.mainView.baseScrollView.delegate = self;
     
-//    [[NetworkManager initInstaceWithServerDomain:@"http://172.17.140.75:3000"] requestURL:@"/api/store" method:RequestGetType parameters:nil success:^(id responseObject) {
-//        NSLog(@"%@",responseObject[@"data"]);
-//
+//    self.navigationController.navigationBar.alpha = 0.0;
+    self.navigationController.navigationBarHidden = YES;
 //    
-//            NSString *picString  = [NSString stringWithFormat:@"http://172.17.140.75:3000%@",responseObject[@"data"][0][@"images"]];
-//            NSURL *picURL = [NSURL URLWithString:picString];
-//            NSData *picData = [NSData dataWithContentsOfURL:picURL];
+    [[NetworkManager initInstaceWithServerDomain:@"http://163.17.136.88:5566"] requestURL:@"/api/ad" method:RequestGetType parameters:nil success:^(id responseObject) {
+    
+        
+        for (id object in responseObject[@"data"]) {
+            NSString *picString  = object[@"image"];
+            NSURL *picURL = [NSURL URLWithString:picString];
+            NSData *picData = [NSData dataWithContentsOfURL:picURL];
+            [self.testArray addObject:picData];
+        }
 //
-//        UIImageView *aaa = [[UIImageView alloc] initWithFrame:CGRectMake(50, 100, 300, 300)];
-//        aaa.image = [UIImage imageWithData:picData];
-//        aaa.backgroundColor = [UIColor whiteColor];
-//        [self.view addSubview:aaa];
+        
+        [self.mainView setScrollViewWithArray:self.testArray];
+        self.mainView.baseScrollView.delegate = self;
+//        NSString *picString = responseObject[@"data"][0][@"image"];
 //
-//    }];
+        
+        
+    }];
 
     
     
@@ -57,41 +67,48 @@
 }
 
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {
-        CGFloat pageWidth = scrollView.frame.size.width;
-        self.page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
-        self.mainView.basePageControl.currentPage = self.page;
+    
+    CGFloat pageWidth = scrollView.frame.size.width;
+    self.page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+    self.mainView.basePageControl.currentPage = self.page;
 }
 
 - (void) buttonTrigger:(id)trigger button:(UIButton *)button {
     switch (button.tag) {
         case 0:{
+
             self.storeController = [[StoreController alloc] init];
             self.storeController.testArray = [NSMutableArray array];
-            
-            [[NetworkManager initInstaceWithServerDomain:@"http://172.17.140.75:3000"] requestURL:@"/api/store" method:RequestGetType parameters:nil success:^(id responseObject) {
-//                if (responseObject) {
+            [[NetworkManager initInstaceWithServerDomain:@"http://163.17.136.88:5566"] requestURL:@"/api/store" method:RequestGetType parameters:nil success:^(id responseObject) {
+                if (responseObject) {
                     [[StoreModel shareInstance].storeDic setDictionary:(NSDictionary*)responseObject];
                     for (id object in [StoreModel shareInstance].storeDic[@"data"]) {
-                        NSString *picString  = [NSString stringWithFormat:@"http://172.17.140.75:3000%@",object[@"images"]];
+                        NSString *picString  = [NSString stringWithFormat:@"http://163.17.136.88:5566/img/%@",object[@"image"]];
                         NSURL *picURL = [NSURL URLWithString:picString];
                         NSData *picData = [NSData dataWithContentsOfURL:picURL];
                         [self.storeController.testArray addObject:picData];
                         [[StoreModel shareInstance].storeNameArray addObject:object[@"name"]];
                         [[StoreModel shareInstance].storeIdArray addObject:object[@"id"]];
-                        NSLog(@"%@",responseObject);
+//                        NSLog(@"%@",responseObject[@"data"]);
 
                     }
                 [self.navigationController pushViewController:self.storeController animated:YES];
-//                }
+                }
             }];
     }
-            
+           
             break;
         case 1:
             NSLog(@"aa");
             break;
         case 2:
-            NSLog(@"aaa");
+            self.recordController = [[RecordController alloc] init];
+            self.databaseModel = [[DatabaseModel alloc] init];
+            NSLog(@"111%@",[self.databaseModel readDataBase:@"VALUE"]);
+            NSLog(@"222%@",[self.databaseModel readDataBase:@"DATA"]);
+            NSLog(@"333%@",[self.databaseModel readDataBase:@"DATE"]);
+            NSLog(@"----%ld",(long)[self.databaseModel countNum]);
+            [self.navigationController pushViewController:self.recordController animated:YES];
             break;
         case 3:
             NSLog(@"aaaa");

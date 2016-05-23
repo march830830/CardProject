@@ -19,7 +19,7 @@
 //    [[UINavigationBar appearance] setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
 //    [UINavigationBar appearance].shadowImage = [UIImage new];
 //    [UINavigationBar appearance].translucent = YES;
-    self.navigationBarHidden = YES;
+//    self.navigationBarHidden = YES;
     
 }
 

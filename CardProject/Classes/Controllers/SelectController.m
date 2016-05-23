@@ -10,7 +10,7 @@
 #import "SelectView.h"
 #import "CardsModel.h"
 
-@interface SelectController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,ButtonDelegate>
+@interface SelectController ()<ButtonDelegate>
 
 @end
 
@@ -18,11 +18,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.selectView = [[SelectView alloc] initWithFrame:self.view.frame];
+    
+    self.selectView = [[SelectView alloc] initWithFrame:self.view.frame CardDic:self.tempCardDic];
     self.view = self.selectView;
     [self.selectView.confirmButton addTarget:self action:@selector(comfirmAction) forControlEvents:UIControlEventTouchUpInside];
     self.selectView.delegate = self;
 
+
+}
+
+- (void) backAction {
+    [self.navigationController popViewControllerAnimated:YES];
+//    [CardsModel shareInstance].cardsArray = [NSMutableArray array];
+//    [CardsModel shareInstance].tempImageArray = [NSMutableArray array];
 }
 
 - (void) comfirmAction {
@@ -41,11 +49,17 @@
         default:{
             button.selected = !button.selected;
             if (button.selected) {
-                [[CardsModel shareInstance].cardsArray addObject:[NSString stringWithFormat:@"%ld",(long)button.tag]];
+                [[CardsModel shareInstance].cardsArray addObject:self.tempCardDic[@"Id"][button.tag]];
+                [[CardsModel shareInstance].tempImageArray addObject:button.currentBackgroundImage];
+                [[CardsModel shareInstance].tempNameArray addObject:self.tempCardDic[@"name"][button.tag]];
+//                NSLog(@"%@",[CardsModel shareInstance].tempImageArray);
             } else {
                 [[CardsModel shareInstance].cardsArray
-                 removeObject:[NSString stringWithFormat:@"%ld",(long)button.tag]];
+                 removeObject:self.tempCardDic[@"Id"][button.tag]];
+                [[CardsModel shareInstance].tempImageArray removeObject:button.currentBackgroundImage];
+                [[CardsModel shareInstance].tempNameArray removeObject:self.tempCardDic[@"name"][button.tag]];
             }
+            NSLog(@"%@:%@",self.tempCardDic[@"Id"][button.tag],self.tempCardDic[@"name"][button.tag]);
         }
             break;
     }

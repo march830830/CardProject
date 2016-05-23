@@ -13,11 +13,14 @@
 #import "SelectController.h"
 #import "NetworkManager.h"
 #import "CardsModel.h"
+#import "DatabaseModel.h"
+#import "InsertData.h"
 
-@interface CalculateController () <ButtonDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface CalculateController () <ButtonDelegate,UITableViewDataSource,UITableViewDelegate,cardValueDelegate>
 
 @property (nonatomic, strong) ResultController *resultController;
 @property (nonatomic, strong) SelectController *selectController;
+@property (nonatomic, strong) NSMutableDictionary *cardDic;
 
 @end
 
@@ -26,12 +29,13 @@
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     NSLog(@"CARD:%@",[CardsModel shareInstance].cardsArray);
+//    [self.cardDic setValue:[NSString stringWithFormat:@"%d",value] forKey:[NSString stringWithFormat:@"%d", tag]];
+
     [self.calculateView.baseTableView reloadData];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"%d",self.storeId);
     
     self.calculateView = [[CalculateView alloc] initWithFrame:self.view.frame];
     self.view = self.calculateView;
@@ -42,33 +46,101 @@
     self.calculateView.delegate = self;
     [self.calculateView.addButton addTarget:self action:@selector(addCardAction) forControlEvents:UIControlEventTouchUpInside];
     [self.calculateView.calButton addTarget:self action:@selector(calAction) forControlEvents:UIControlEventTouchUpInside];
-
-
+    self.cardDic = [NSMutableDictionary dictionary];
+    
     
 }
 
 - (void) addCardAction {
-    self.selectController = [[SelectController alloc] init];
-    [self.navigationController pushViewController:self.selectController animated:YES];
+    [[NetworkManager initInstaceWithServerDomain:@"http://163.17.136.88:5566"] requestURL:@"/api/store/1/card" method:RequestGetType parameters:nil success:^(id responseObject) {
+        
+        
+        NSMutableArray *tempImageArray = [NSMutableArray array];
+        NSMutableArray *tempNameArray = [NSMutableArray array];
+        NSMutableArray *tempIdArray = [NSMutableArray array];
+
+        for (id object in responseObject[@"data"][@"cards"]) {
+            
+            NSString *picString  = [NSString stringWithFormat:@"http://163.17.136.88:5566/img/%@",object[@"image"]];
+            NSURL *picURL = [NSURL URLWithString:picString];
+            NSData *picData = [NSData dataWithContentsOfURL:picURL];
+            [tempImageArray addObject:picData];
+            [tempNameArray addObject:object[@"name"]];
+            [tempIdArray addObject:object[@"id"]];
+
+        }
+//        NSLog(@"%@",tempNameArray);
+        
+        self.selectController = [[SelectController alloc] init];
+        self.selectController.tempCardDic = [NSMutableDictionary dictionary];
+        
+        [self.selectController.tempCardDic setObject:tempImageArray forKey:@"image"];
+        [self.selectController.tempCardDic setObject:tempNameArray forKey:@"name"];
+        [self.selectController.tempCardDic setObject:tempIdArray forKey:@"Id"];
+        [CardsModel shareInstance].cardsArray = [NSMutableArray array];
+        [CardsModel shareInstance].tempImageArray = [NSMutableArray array];
+        [self.navigationController pushViewController:self.selectController animated:YES];
+    
+    }];
+    
 }
 
 - (void) calAction {
 //    if ([self.calculateView.totalField.text isEqualToString:@""]) {
 //        NSLog(@"asadsd");
 //    }
-    
-    //    NSLog(@"%@",self.calculateView.totalField.text);
-    
-    //    NSDictionary *parameters = @{@"store_id":@"1",@"price":@"10000",@"card":@[@{@"id":@"1",@"sum":@"2"},@{@"id":@"2",@"sum":@"1"}]};
-    //
-    //    [[NetworkManager initInstaceWithServerDomain:@"http://172.17.140.75:3000"] requestURL:@"/api/opration" method:RequestPostType parameters:parameters success:^(id responseObject) {
-    //        NSLog(@"adsasd%@",responseObject);
-    //
-    //    }];
-    
-    self.resultController = [[ResultController alloc] init];
-    [self.navigationController pushViewController:self.resultController animated:YES];
-    
+    if (self.cardDic.count == 0) {
+        [self alertController:@"請輸入卡片張數"];
+    } else if (self.calculateView.totalField.text.length == 0) {
+        [self alertController:@"請輸入消費金額"];
+    } else {
+        self.resultController = [[ResultController alloc] init];
+        self.resultController.resultDic = [NSMutableDictionary dictionary];
+        
+        NSMutableArray *costArray = [NSMutableArray array];
+        NSMutableArray *idArray = [NSMutableArray array];
+        NSMutableArray *pointArray = [NSMutableArray array];
+        NSMutableArray *nameArray = [NSMutableArray array];
+        NSMutableArray *imageArray = [NSMutableArray array];
+        
+        NSMutableArray *cardArray = [NSMutableArray array];
+        for (NSString *keyId in self.cardDic.allKeys) {
+            [cardArray addObject:@{@"id" : keyId, @"sum" : self.cardDic[keyId]}];
+        }
+        NSDictionary *parameters = @{@"price":self.calculateView.totalField.text,@"store_id":@"1",@"card":cardArray};
+        [[NetworkManager initInstaceWithServerDomain:@"http://163.17.136.88:5566"] requestURL:@"/api/operation" method:RequestPostType parameters:parameters success:^(id responseObject) {
+            NSLog(@"%@",responseObject);
+            for (id object in responseObject[@"data"]) {
+                [costArray addObject:object[@"cost"]];
+                [idArray addObject:object[@"id"]];
+                [pointArray addObject:object[@"point"]];
+                [nameArray addObject:object[@"name"]];
+                NSString *picString  = [NSString stringWithFormat:@"http://163.17.136.88:5566/img/%@",object[@"image"]];
+                NSURL *picURL = [NSURL URLWithString:picString];
+                NSData *picData = [NSData dataWithContentsOfURL:picURL];
+                [imageArray addObject:picData];
+            }
+            [self.resultController.resultDic setValue:costArray forKey:@"cost"];
+            [self.resultController.resultDic setValue:idArray forKey:@"id"];
+            [self.resultController.resultDic setValue:nameArray forKey:@"name"];
+            [self.resultController.resultDic setValue:imageArray forKey:@"image"];
+            [self.resultController.resultDic setValue:pointArray forKey:@"point"];
+            self.resultController.pointString = [NSString stringWithFormat:@"%@",responseObject[@"value"]];
+            
+            NSError *err = nil;
+            NSData * jsonData = [NSJSONSerialization dataWithJSONObject:responseObject[@"data"] options:0 error:&err];
+            NSString * dataString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+            //        NSLog(@"------%@", dataString);
+            InsertData *tempInsert = [[InsertData alloc] init];
+            tempInsert.insertData = dataString;
+            tempInsert.insertValue = responseObject[@"value"];
+            tempInsert.insertOperationID = responseObject[@"operation_id"];
+            self.resultController.insertData = tempInsert;
+            [self.navigationController pushViewController:self.resultController animated:YES];
+            
+        }];
+    }
+
 }
 
 - (void) buttonTrigger:(id)trigger button:(UIButton *)button {
@@ -92,10 +164,20 @@
     if (!cell) {
         cell = [[CardCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier type:0];
     }
-    cell.textLabel.text = @"ads";
-    cell.backgroundColor =  (indexPath.row == 0) ? [UIColor brownColor] : [UIColor blueColor];
+
+    cell.cardLabel.text = [NSString stringWithFormat:@"%@",[CardsModel shareInstance].tempNameArray[indexPath.row]];
+    cell.cardImage.image = [CardsModel shareInstance].tempImageArray[indexPath.row];
+    cell.tag = [[CardsModel shareInstance].cardsArray[indexPath.row] integerValue];
+    cell.delegate = self;
     
     return cell;
+}
+
+- (void) card:(CardCell *)cardcell didSelectAtTag:(NSInteger)tag value:(NSInteger)value {
+    [self.cardDic setValue:[NSString stringWithFormat:@"%d",value] forKey:[NSString stringWithFormat:@"%d", tag]];
+    NSLog(@"%@",self.cardDic);
+//    self.
+//    self.resultDic = [NSMutableDictionary dictionaryWithObject:value forKey:tag];
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -108,6 +190,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void) alertController:(NSString*) string {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"錯誤" message:string preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
+    [alertController addAction:alertAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
 /*
 #pragma mark - Navigation
 

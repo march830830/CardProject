@@ -17,7 +17,7 @@
         [self setScrollViewWithArray:imageArray];
         
         self.storeLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.frame) * 0.2, CGRectGetHeight(self.frame) * 0.775, CGRectGetWidth(self.frame) * 0.6, CGRectGetHeight(self.frame) * 0.045)];
-        self.storeLabel.backgroundColor = [UIColor magentaColor];
+        self.storeLabel.backgroundColor = [UIColor clearColor];
         self.storeLabel.font = [UIFont boldSystemFontOfSize:21];
         self.storeLabel.textAlignment = NSTextAlignmentCenter;
         self.storeLabel.textColor = [UIColor whiteColor];

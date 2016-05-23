@@ -22,37 +22,37 @@
         
         CGFloat boundsHeight = ( CGRectGetHeight([[UIScreen mainScreen] bounds]) * 0.25 ) / 3;
         
-        self.backgroundColor = [UIColor lightGrayColor];
-        self.cardImage = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, boundsHeight, boundsHeight)];
-        self.cardImage.image = [UIImage imageNamed:@"玉山"];
+        self.backgroundColor = [UIColor clearColor];
+        
+        self.cardImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 5, boundsHeight, boundsHeight)];
+//        self.cardImage.image = [UIImage imageNamed:@"玉山"];
         [self addSubview:self.cardImage];
         
-        self.cardLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.frame) * 0.2, 10, CGRectGetWidth(self.frame) * 0.3, CGRectGetHeight(self.frame))];
-        self.cardLabel.text = @"玉山銀行";
+        self.cardLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.frame) * 0.2, 10, CGRectGetWidth(self.frame) * 0.4, CGRectGetHeight(self.frame))];
         self.cardLabel.textAlignment = NSTextAlignmentCenter;
 //        self.cardLabel.backgroundColor = [UIColor greenColor];
         self.cardLabel.textColor = [UIColor whiteColor];
         [self addSubview:self.cardLabel];
         
         if (type == 0) {
-            self.cutButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.frame) * 0.5, CGRectGetMidY(self.frame), CGRectGetWidth(self.frame) * 0.06, CGRectGetWidth(self.frame) * 0.06)];
+            self.cutButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth([UIScreen mainScreen].bounds) * 0.6, CGRectGetMidY(self.frame), CGRectGetWidth(self.frame) * 0.04, CGRectGetWidth(self.frame) * 0.07)];
             [self.cutButton setBackgroundImage:[UIImage imageNamed:@"button_arrow_prev"] forState:UIControlStateNormal];
             self.cutButton.tag = 0;
             [self.cutButton addTarget:self action:@selector(cardAction:) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:self.cutButton];
             
-            self.valueLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.frame) * 0.65, CGRectGetMidY(self.frame), CGRectGetWidth(self.frame) * 0.06, CGRectGetWidth(self.frame) * 0.06)];
+            self.valueLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.cutButton.frame) + 10, CGRectGetMidY(self.frame), CGRectGetWidth(self.frame) * 0.06, CGRectGetWidth(self.frame) * 0.06)];
             self.valueLabel.text = @"1";
+            self.valueLabel.textColor = [UIColor whiteColor];
             [self addSubview:self.valueLabel];
             
-            self.addButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.frame) * 0.76, CGRectGetMidY(self.frame), CGRectGetWidth(self.frame) * 0.06, CGRectGetWidth(self.frame) * 0.06)];
+            self.addButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.valueLabel.frame), CGRectGetMidY(self.frame), CGRectGetWidth(self.frame) * 0.04, CGRectGetWidth(self.frame) * 0.07)];
             [self.addButton setBackgroundImage:[UIImage imageNamed:@"button_arrow_next"] forState:UIControlStateNormal];
             self.addButton.tag = 1;
             [self.addButton addTarget:self action:@selector(cardAction:) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:self.addButton];
         } else {
-            self.costLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.frame) * 0.5, 10, CGRectGetWidth(self.frame) * 0.35, CGRectGetHeight(self.frame))];
-            self.costLabel.text = @"3000";
+            self.costLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth([UIScreen mainScreen].bounds) * 0.6, 10, CGRectGetWidth(self.frame) * 0.35, CGRectGetHeight(self.frame))];
             self.costLabel.textAlignment = NSTextAlignmentCenter;
             self.costLabel.textColor = [UIColor whiteColor];
             [self addSubview:self.costLabel];
@@ -73,7 +73,24 @@
         cardValue ++;
     }
     self.valueLabel.text = [NSString stringWithFormat:@"%ld",(long)cardValue];
-    NSLog(@"%@",self.valueLabel.text);
+    
+    if ([self.delegate respondsToSelector:@selector(card:didSelectAtTag:value:)]) {
+        [self.delegate card:self didSelectAtTag:self.tag value:[self.valueLabel.text integerValue]];
+    }
+    
+//    NSLog(@"%d , %@:%@",self.tag ,self.cardLabel.text,self.valueLabel.text);
+}
+
+- (void) setData:(CardData *)data {
+    _cardData = data;
+    self.costLabel.text = [NSString stringWithFormat:@"%@", data.cost];
+    
+    [self refreshCell];
+}
+- (void) refreshCell {
+    //    NSLog(@"%@,%@,%@", self.recordData.data, self.recordData.date, self.recordData.value);
+    NSLog(@"%@",self.cardData.cost);
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -39,7 +39,6 @@
         [self addSubview:self.bottomLine];
         
         self.totalLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.frame) * 0.1, CGRectGetHeight(self.frame) * 0.87, CGRectGetWidth(self.frame) * 0.2, CGRectGetHeight(self.frame) * 0.07)];
-        self.totalLabel.backgroundColor = [UIColor magentaColor];
         self.totalLabel.text = @"Total";
         self.totalLabel.textColor = [UIColor whiteColor];
         self.totalLabel.textAlignment = NSTextAlignmentCenter;

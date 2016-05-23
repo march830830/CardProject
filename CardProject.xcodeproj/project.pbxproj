@@ -16,6 +16,7 @@
 		473070BF1C50CA5E007D8838 /* CalculateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 473070BE1C50CA5E007D8838 /* CalculateView.m */; };
 		475560FB1C4F7F1400972001 /* BaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 475560FA1C4F7F1400972001 /* BaseView.m */; };
 		479810CC1C549A91003EBE0B /* CardsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 479810CB1C549A91003EBE0B /* CardsModel.m */; };
+		47CA03131CD9028E00A48050 /* UIColor+Decoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 47CA03121CD9028E00A48050 /* UIColor+Decoder.m */; };
 		47D1633C1C103CAE00F6C0E1 /* MainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D1633B1C103CAD00F6C0E1 /* MainView.m */; };
 		47D1633F1C103CBB00F6C0E1 /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D1633E1C103CBB00F6C0E1 /* MainController.m */; };
 		47D163421C103DAF00F6C0E1 /* NavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D163411C103DAF00F6C0E1 /* NavController.m */; };
@@ -32,6 +33,15 @@
 		47F73E9A1C535EE4004663FB /* SelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F73E991C535EE4004663FB /* SelectView.m */; };
 		47F73E9D1C537C6E004663FB /* StoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F73E9C1C537C6E004663FB /* StoreModel.m */; };
 		47F73EA01C539EE7004663FB /* NetworkManager+Method.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F73E9F1C539EE7004663FB /* NetworkManager+Method.m */; };
+		9C57ACAB1CF1609300B77BC4 /* RecordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C57ACA61CF1609300B77BC4 /* RecordView.m */; };
+		9C57ACAC1CF1609300B77BC4 /* RecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C57ACA81CF1609300B77BC4 /* RecordCell.m */; };
+		9C57ACAD1CF1609300B77BC4 /* RecordHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C57ACAA1CF1609300B77BC4 /* RecordHeaderView.m */; };
+		9C57ACB41CF160AC00B77BC4 /* DatabaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C57ACAF1CF160AC00B77BC4 /* DatabaseModel.m */; };
+		9C57ACB51CF160AC00B77BC4 /* RecordData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C57ACB11CF160AC00B77BC4 /* RecordData.m */; };
+		9C57ACB61CF160AC00B77BC4 /* CardData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C57ACB31CF160AC00B77BC4 /* CardData.m */; };
+		9C57ACB91CF160B900B77BC4 /* RecordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C57ACB81CF160B900B77BC4 /* RecordController.m */; };
+		9C57ACC21CF1864100B77BC4 /* InsertData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C57ACC11CF1864100B77BC4 /* InsertData.m */; };
+		9C57ACC51CF1B3F500B77BC4 /* RecordFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C57ACC41CF1B3F500B77BC4 /* RecordFooterView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +78,8 @@
 		475560FA1C4F7F1400972001 /* BaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseView.m; sourceTree = "<group>"; };
 		479810CA1C549A91003EBE0B /* CardsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardsModel.h; sourceTree = "<group>"; };
 		479810CB1C549A91003EBE0B /* CardsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardsModel.m; sourceTree = "<group>"; };
+		47CA03111CD9028E00A48050 /* UIColor+Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Decoder.h"; sourceTree = "<group>"; };
+		47CA03121CD9028E00A48050 /* UIColor+Decoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Decoder.m"; sourceTree = "<group>"; };
 		47D1633A1C103CAD00F6C0E1 /* MainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainView.h; sourceTree = "<group>"; };
 		47D1633B1C103CAD00F6C0E1 /* MainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainView.m; sourceTree = "<group>"; };
 		47D1633D1C103CBB00F6C0E1 /* MainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainController.h; sourceTree = "<group>"; };
@@ -105,6 +117,24 @@
 		493F329A43476306C03F756F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		7AE9DD2C21E903BAD78BDB05 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B168EF6BD128A267A403269 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		9C57ACA51CF1609300B77BC4 /* RecordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordView.h; sourceTree = "<group>"; };
+		9C57ACA61CF1609300B77BC4 /* RecordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordView.m; sourceTree = "<group>"; };
+		9C57ACA71CF1609300B77BC4 /* RecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordCell.h; sourceTree = "<group>"; };
+		9C57ACA81CF1609300B77BC4 /* RecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordCell.m; sourceTree = "<group>"; };
+		9C57ACA91CF1609300B77BC4 /* RecordHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordHeaderView.h; sourceTree = "<group>"; };
+		9C57ACAA1CF1609300B77BC4 /* RecordHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordHeaderView.m; sourceTree = "<group>"; };
+		9C57ACAE1CF160AC00B77BC4 /* DatabaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseModel.h; sourceTree = "<group>"; };
+		9C57ACAF1CF160AC00B77BC4 /* DatabaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseModel.m; sourceTree = "<group>"; };
+		9C57ACB01CF160AC00B77BC4 /* RecordData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordData.h; sourceTree = "<group>"; };
+		9C57ACB11CF160AC00B77BC4 /* RecordData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordData.m; sourceTree = "<group>"; };
+		9C57ACB21CF160AC00B77BC4 /* CardData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardData.h; sourceTree = "<group>"; };
+		9C57ACB31CF160AC00B77BC4 /* CardData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardData.m; sourceTree = "<group>"; };
+		9C57ACB71CF160B900B77BC4 /* RecordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordController.h; sourceTree = "<group>"; };
+		9C57ACB81CF160B900B77BC4 /* RecordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordController.m; sourceTree = "<group>"; };
+		9C57ACC01CF1864100B77BC4 /* InsertData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InsertData.h; sourceTree = "<group>"; };
+		9C57ACC11CF1864100B77BC4 /* InsertData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InsertData.m; sourceTree = "<group>"; };
+		9C57ACC31CF1B3F500B77BC4 /* RecordFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordFooterView.h; sourceTree = "<group>"; };
+		9C57ACC41CF1B3F500B77BC4 /* RecordFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordFooterView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +252,8 @@
 				473070AF1C50A87E007D8838 /* BaseController.m */,
 				47D163401C103DAF00F6C0E1 /* NavController.h */,
 				47D163411C103DAF00F6C0E1 /* NavController.m */,
+				9C57ACB71CF160B900B77BC4 /* RecordController.h */,
+				9C57ACB81CF160B900B77BC4 /* RecordController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -233,6 +265,14 @@
 				47F73E9C1C537C6E004663FB /* StoreModel.m */,
 				479810CA1C549A91003EBE0B /* CardsModel.h */,
 				479810CB1C549A91003EBE0B /* CardsModel.m */,
+				9C57ACAE1CF160AC00B77BC4 /* DatabaseModel.h */,
+				9C57ACAF1CF160AC00B77BC4 /* DatabaseModel.m */,
+				9C57ACB01CF160AC00B77BC4 /* RecordData.h */,
+				9C57ACB11CF160AC00B77BC4 /* RecordData.m */,
+				9C57ACB21CF160AC00B77BC4 /* CardData.h */,
+				9C57ACB31CF160AC00B77BC4 /* CardData.m */,
+				9C57ACC01CF1864100B77BC4 /* InsertData.h */,
+				9C57ACC11CF1864100B77BC4 /* InsertData.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -240,6 +280,8 @@
 		47D978991C0067A800DD6E85 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				47CA03111CD9028E00A48050 /* UIColor+Decoder.h */,
+				47CA03121CD9028E00A48050 /* UIColor+Decoder.m */,
 				473070B11C50C58D007D8838 /* UIImage+Extends.h */,
 				473070B21C50C58D007D8838 /* UIImage+Extends.m */,
 				47F73E921C5349CE004663FB /* NetworkManager.h */,
@@ -267,6 +309,14 @@
 				47F73E8A1C532A70004663FB /* CardCell.m */,
 				475560F91C4F7F1400972001 /* BaseView.h */,
 				475560FA1C4F7F1400972001 /* BaseView.m */,
+				9C57ACA51CF1609300B77BC4 /* RecordView.h */,
+				9C57ACA61CF1609300B77BC4 /* RecordView.m */,
+				9C57ACA71CF1609300B77BC4 /* RecordCell.h */,
+				9C57ACA81CF1609300B77BC4 /* RecordCell.m */,
+				9C57ACA91CF1609300B77BC4 /* RecordHeaderView.h */,
+				9C57ACAA1CF1609300B77BC4 /* RecordHeaderView.m */,
+				9C57ACC31CF1B3F500B77BC4 /* RecordFooterView.h */,
+				9C57ACC41CF1B3F500B77BC4 /* RecordFooterView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -300,6 +350,7 @@
 				47D9785A1C00667800DD6E85 /* Frameworks */,
 				47D9785B1C00667800DD6E85 /* Resources */,
 				B40F235F4060895000B40EE3 /* Copy Pods Resources */,
+				C6D9949D75B77D5149EFE8AD /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -444,6 +495,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		C6D9949D75B77D5149EFE8AD /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -456,19 +522,29 @@
 				473070B31C50C58D007D8838 /* UIImage+Extends.m in Sources */,
 				47F73EA01C539EE7004663FB /* NetworkManager+Method.m in Sources */,
 				47F73E911C53490A004663FB /* ResultView.m in Sources */,
+				9C57ACB61CF160AC00B77BC4 /* CardData.m in Sources */,
 				47F73E8B1C532A70004663FB /* CardCell.m in Sources */,
+				9C57ACB51CF160AC00B77BC4 /* RecordData.m in Sources */,
+				9C57ACAB1CF1609300B77BC4 /* RecordView.m in Sources */,
 				473070AA1C50A3F3007D8838 /* StoreView.m in Sources */,
+				9C57ACC21CF1864100B77BC4 /* InsertData.m in Sources */,
+				9C57ACB41CF160AC00B77BC4 /* DatabaseModel.m in Sources */,
 				47D1633C1C103CAE00F6C0E1 /* MainView.m in Sources */,
+				9C57ACC51CF1B3F500B77BC4 /* RecordFooterView.m in Sources */,
 				473070AD1C50A403007D8838 /* StoreController.m in Sources */,
 				47F73E9A1C535EE4004663FB /* SelectView.m in Sources */,
 				475560FB1C4F7F1400972001 /* BaseView.m in Sources */,
 				47D978651C00667800DD6E85 /* AppDelegate.m in Sources */,
 				47F73E9D1C537C6E004663FB /* StoreModel.m in Sources */,
+				9C57ACAD1CF1609300B77BC4 /* RecordHeaderView.m in Sources */,
+				9C57ACAC1CF1609300B77BC4 /* RecordCell.m in Sources */,
 				473070B01C50A87E007D8838 /* BaseController.m in Sources */,
 				47D163421C103DAF00F6C0E1 /* NavController.m in Sources */,
 				473070BF1C50CA5E007D8838 /* CalculateView.m in Sources */,
 				47D1633F1C103CBB00F6C0E1 /* MainController.m in Sources */,
 				473070BC1C50CA51007D8838 /* CalculateController.m in Sources */,
+				9C57ACB91CF160B900B77BC4 /* RecordController.m in Sources */,
+				47CA03131CD9028E00A48050 /* UIColor+Decoder.m in Sources */,
 				47D978621C00667800DD6E85 /* main.m in Sources */,
 				479810CC1C549A91003EBE0B /* CardsModel.m in Sources */,
 				47F73E8E1C53489D004663FB /* ResultController.m in Sources */,

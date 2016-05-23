@@ -14,8 +14,7 @@
 @interface MainView : BaseView
 
 @property (nonatomic, strong) UIView *bottomLine;
-
-- (instancetype) initWithFrame:(CGRect)frame ImageArray:(NSMutableArray*) imageArray;
+- (instancetype) initWithFrame:(CGRect)frame;
 
 
 @end

@@ -32,6 +32,10 @@ static NSString * const RESTAlertDeleteTitle = @"HTTP DELETE Status";
 //        networkManager.requestSerializer.timeoutInterval = HTTPRequestTimeout;
         networkManager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
         networkManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", nil];
+        
+        networkManager.responseSerializer = [AFJSONResponseSerializer serializer];
+        networkManager.requestSerializer = [AFJSONRequestSerializer serializer];
+
     });
     return networkManager;
 }
@@ -42,6 +46,9 @@ static NSString * const RESTAlertDeleteTitle = @"HTTP DELETE Status";
     NSAssert(self.restapiBaseURL != nil, @"You must set base url");
     
     [self.requestSerializer setTimeoutInterval:RESTRequestTimeout];
+    [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+
     NSString *apiURL = [self.restapiBaseURL stringByAppendingPathComponent:url];
     
     typeof(self) __weak weakSelf = self;

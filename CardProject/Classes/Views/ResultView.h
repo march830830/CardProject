@@ -14,5 +14,5 @@
 @property (nonatomic, strong) UIView *bottomLine;
 @property (nonatomic, strong) UIButton *saveButton;
 @property (nonatomic, strong) UIButton *continueButton;
-
+@property (nonatomic, strong) UILabel *pointLabel;
 @end

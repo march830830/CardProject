@@ -12,11 +12,12 @@
 
 @property (nonatomic, strong) NSMutableArray *buttons;
 
+
 @end
 
 @implementation MainView
 
-- (instancetype) initWithFrame:(CGRect)frame ImageArray:(NSMutableArray*) imageArray {
+- (instancetype) initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame titleString:@"Latest Promotion"];
     if (self) {
         
@@ -46,9 +47,13 @@
             buttonPoint.x += CGRectGetWidth(self.frame) * 0.2;
         }];
         
+//
+        
     }
     return self;
 }
+
+
 
 - (void) buttonAction:(UIButton*)button {
     [self.delegate buttonTrigger:self button:button];

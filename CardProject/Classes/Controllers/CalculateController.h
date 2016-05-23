@@ -14,4 +14,6 @@
 
 @property (nonatomic, strong) CalculateView *calculateView;
 @property (nonatomic) NSInteger storeId;
+
+
 @end

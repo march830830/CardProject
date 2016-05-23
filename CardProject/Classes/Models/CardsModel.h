@@ -12,5 +12,8 @@
 
 + (CardsModel*) shareInstance;
 @property (nonatomic, strong) NSMutableArray *cardsArray;
+@property (nonatomic, strong) NSMutableArray *tempImageArray;
+@property (nonatomic, strong) NSMutableArray *tempNameArray;
+@property (nonatomic, strong) NSDictionary *cardsDic;
 
 @end

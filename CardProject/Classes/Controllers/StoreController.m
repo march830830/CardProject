@@ -12,10 +12,11 @@
 #import "NetworkManager.h"
 #import "StoreModel.h"
 #import "NetworkManager+Method.h"
+#import "CardsModel.h"
+
 @interface StoreController ()<ButtonDelegate,UIScrollViewDelegate>
 
 @property (nonatomic) NSInteger page;
-@property (nonatomic, strong) NSMutableDictionary *storeDic;
 @property (nonatomic, strong) CalculateController *calculateController;
 
 @end
@@ -30,10 +31,9 @@
     self.view = self.storeView;
     self.storeView.delegate = self;
     self.storeView.baseScrollView.delegate = self;
-    self.storeDic = [[NSMutableDictionary alloc] initWithObjects:@[@"我愛明禎",@"我超愛明禎",@"我無敵愛明禎"] forKeys:@[@"0",@"1",@"2"]];
     [self.storeView.confirmButton addTarget:self action:@selector(confirmAction) forControlEvents:UIControlEventTouchUpInside];
     self.storeView.storeLabel.text = [NSString stringWithFormat:@"%@",[StoreModel shareInstance].storeNameArray[0]];
-
+    self.navigationController.navigationBar.alpha = 0.0;
     
 }
 
@@ -45,11 +45,15 @@
 }
 
 - (void) confirmAction {
-    [[NetworkManager initInstaceWithServerDomain:@"http://172.17.140.75:3000"] requestURL:[NSString stringWithFormat:@"/api/store/%@",[StoreModel shareInstance].storeIdArray[self.page]] method:RequestGetType parameters:nil success:^(id responseObject) {
+    [[NetworkManager initInstaceWithServerDomain:@"http://163.17.136.88:5566"] requestURL:[NSString stringWithFormat:@"/api/store/%@",[StoreModel shareInstance].storeIdArray[self.page]] method:RequestGetType parameters:nil success:^(id responseObject) {
         self.calculateController = [[CalculateController alloc] init];
         self.calculateController.storeId = [[StoreModel shareInstance].storeIdArray[self.page] integerValue];
+        [CardsModel shareInstance].cardsArray = [NSMutableArray array];
+        [CardsModel shareInstance].tempImageArray = [NSMutableArray array];
         [self.navigationController pushViewController:self.calculateController animated:YES];
-
+        
+        
+//        NSLog(@"%@",responseObject);
     }];
 }
 

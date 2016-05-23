@@ -14,5 +14,8 @@
 @interface SelectController : BaseController
 
 @property (nonatomic, strong) SelectView *selectView;
+@property (nonatomic, strong) NSMutableDictionary *tempCardDic;
+
+
 
 @end

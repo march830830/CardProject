@@ -8,15 +8,18 @@
 
 #import "BaseView.h"
 #import "UIImage+Extends.h"
+#import "UIColor+Decoder.h"
 
 @implementation BaseView
 
 - (instancetype) initWithFrame:(CGRect)frame titleString:(NSString*) titleString {
     self = [super initWithFrame:frame];
     if (self) {
-        self.bg = [[UIImageView alloc] initWithFrame:self.frame];
-        self.bg.image = [UIImage imageNamed:@"bg"];
-        [self addSubview:self.bg];
+//        self.bg = [[UIImageView alloc] initWithFrame:self.frame];
+//        self.bg.image = [UIImage imageNamed:@"bg"];
+//        [self addSubview:self.bg];
+
+        self.backgroundColor = [UIColor colorWithRedValue:45.0 greenValue:52.0 blueValue:72.0];
         
         self.logoImage = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.frame) * 0.3, CGRectGetHeight(self.frame) * 0.045, CGRectGetWidth(self.frame) * 0.4, CGRectGetHeight(self.frame) * 0.055)];
         self.logoImage.image = [UIImage imageNamed:@"titleImage"];
@@ -70,14 +73,11 @@
 
 - (void) setScrollViewWithArray:(NSMutableArray*) imageArray {
     
-    self.nextButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.frame) * 0.85, CGRectGetHeight(self.frame) * 0.5, CGRectGetWidth(self.frame) * 0.11, CGRectGetWidth(self.frame) * 0.11)];
-//    [self.nextButton setBackgroundImage:[UIImage fitImage:@"button_arrow_next" size:self.nextButton.frame.size] forState:UIControlStateNormal];
-//    [self.nextButton setBackgroundImage:[UIImage imageNamed:@"button_arrow_next"] forState:UIControlStateNormal];
-
+    self.nextButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.frame) * 0.89, CGRectGetHeight(self.frame) * 0.5, CGRectGetWidth(self.frame) * 0.04, CGRectGetWidth(self.frame) * 0.07)];
     [self configureBtn:self.nextButton imageName:@"button_arrow_next" tag:10];
     [self addSubview:self.nextButton];
 
-    self.prevButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.frame) * 0.04, CGRectGetHeight(self.frame) * 0.5, CGRectGetWidth(self.frame) * 0.11, CGRectGetWidth(self.frame) * 0.11)];
+    self.prevButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.frame) * 0.04, CGRectGetHeight(self.frame) * 0.5, CGRectGetWidth(self.frame) * 0.04, CGRectGetWidth(self.frame) * 0.07)];
     [self configureBtn:self.prevButton imageName:@"button_arrow_prev" tag:11];
     [self addSubview:self.prevButton];
     
@@ -85,7 +85,7 @@
     self.baseScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.frame) * 0.2, CGRectGetHeight(self.frame) * 0.32, CGRectGetWidth(self.frame) * 0.6, CGRectGetHeight(self.frame) * 0.41)];
     self.baseScrollView.backgroundColor = [UIColor clearColor];
     [self addSubview:self.baseScrollView];
-    
+
     for (int i = 0 ; i < imageArray.count; i ++) {
         CGRect frame;
         frame.origin.x = self.baseScrollView.frame.size.width * i;
@@ -95,11 +95,12 @@
         UIImageView *infoImage = [[UIImageView alloc] initWithFrame:frame];
 //        NSLog(@"%@", imageArray[i]);
         infoImage.image = [UIImage imageWithData:imageArray[i]];
+//        infoImage.image = [UIImage imageNamed:imageArray[i]];
         infoImage.tag = i;
         [self.baseScrollView addSubview:infoImage];
     }
     self.basePageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.baseScrollView.frame), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame) *0.02 )];
-    self.basePageControl.backgroundColor = [UIColor blackColor];
+    self.basePageControl.backgroundColor = [UIColor clearColor];
     [self addSubview:self.basePageControl];
     
     [self.baseScrollView setPagingEnabled:YES];
@@ -108,8 +109,8 @@
 }
 
 - (void) showBaseTableView{
-    self.baseTableView = [[UITableView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.frame) * 0.15, CGRectGetHeight(self.frame) * 0.4, CGRectGetWidth(self.frame) * 0.7, CGRectGetHeight(self.frame) * 0.35)];
-    self.baseTableView.backgroundColor = [UIColor magentaColor];
+    self.baseTableView = [[UITableView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.frame) * 0.12, CGRectGetHeight(self.frame) * 0.4, CGRectGetWidth(self.frame) * 0.78, CGRectGetHeight(self.frame) * 0.35)];
+    self.baseTableView.backgroundColor = [UIColor clearColor];
     self.baseTableView.separatorStyle = UITableViewCellSelectionStyleNone;
     [self addSubview:self.baseTableView];
 }

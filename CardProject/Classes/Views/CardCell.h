@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CardData.h"
+
+@protocol cardValueDelegate;
 
 @interface CardCell : UITableViewCell
 
@@ -17,5 +20,14 @@
 @property (nonatomic, strong) UILabel *valueLabel;
 @property (nonatomic, strong) UILabel *cardLabel;
 @property (nonatomic, strong) UILabel *costLabel;
+@property (nonatomic, weak) id<cardValueDelegate> delegate;
+@property (nonatomic, strong, setter=setData:) CardData *cardData;
+
+@end
+
+@protocol cardValueDelegate <NSObject>
+
+@required
+- (void) card:(CardCell*)cardcell didSelectAtTag:(NSInteger)tag value:(NSInteger)value;
 
 @end

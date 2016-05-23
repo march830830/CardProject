@@ -23,8 +23,9 @@
     self = [super init];
     if (self) {
         self.cardsArray = [NSMutableArray array];
-        
-        
+        self.tempImageArray = [NSMutableArray array];        
+        self.tempNameArray = [NSMutableArray array];
+
     }
     return self;
 }

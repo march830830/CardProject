@@ -13,6 +13,7 @@
 @optional
 
 - (void) buttonTrigger:(id)trigger button:(UIButton*)button ;
+- (void) buttonTrigger:(id)trigger button:(UIButton*)button tag:(NSInteger)tag name:(NSString*)name;
 - (void) buttonTrigger:(id)trigger button:(UIButton*)button buttons:(NSMutableArray*)buttons;
 
 @end
